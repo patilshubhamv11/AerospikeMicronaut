@@ -1,0 +1,35 @@
+micronaut:
+  application:
+    name: aerospike
+  router:
+      static-resources:
+        swagger:
+          paths: classpath:META-INF/swagger
+          mapping: /swagger/**
+        swagger-ui:
+          paths: classpath:META-INF/swagger/views/swagger-ui
+          mapping: /swagger-ui/**
+  intercept-url-map:
+    - pattern: /**/swagger/**
+      httpMethod: GET
+      access:
+        - isAnonymous()
+    - pattern: /**/swagger-ui/**
+      httpMethod: GET
+      access:
+        - isAnonymous()
+  server:
+      port: 9091
+
+
+aerospike:
+  host: 127.0.0.1
+  port: 3000
+  namespace: test
+netty:
+    default:
+       allocator:
+         max-order: 3
+kafka:
+  bootstrap:
+    servers: localhost:9092
